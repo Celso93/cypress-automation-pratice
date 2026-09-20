@@ -1,0 +1,42 @@
+# Dependências
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Artefatos gerados pelo Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+cypress/results/
+
+# Relatórios de teste (mochawesome, junit, allure, coverage, etc.)
+cypress/reports/
+mochawesome-report/
+mochawesome.json
+report/
+reports/
+junit/
+junit-results/
+junit-report*.xml
+allure-results/
+allure-report/
+coverage/
+.nyc_output/
+
+# Variáveis de ambiente e credenciais
+.env
+.env.*
+!.env.example
+cypress.env.json
+*.pem
+*.key
+*credentials*
+
+# Sistema operacional / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
