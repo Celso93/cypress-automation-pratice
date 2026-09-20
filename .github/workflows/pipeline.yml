@@ -1,0 +1,35 @@
+name: 'Execução da Pipeline'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-e-testes-e2e:
+    name: Build do projeto e execução dos testes
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      - name: Instalando dependências
+        run: npm ci
+
+      - name: Executando os testes internos de API
+        run: npm run test:headless
+
+      # - name: Publicando o report dos testes internos
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: internal-report
+      #     path: reports/internal-report.html
