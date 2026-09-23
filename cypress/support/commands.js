@@ -1,25 +1,8 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-
 Cypress.Commands.add('cadastroNovoUsuario', (email) => {
     cy.get('a[href="/login"]').click()
     cy.contains('h2', 'New User Signup!').should('be.visible')
 
-    cy.get('input[data-qa=signup-name]').type('John Doe')
-    cy.get('input[data-qa=signup-email]').type(email)
-    cy.get('button[data-qa=signup-button]').click()
-
+    cy.cadastroUsuarioTelaLogin(email)
     cy.contains('h2', 'Enter Account Information').should('be.visible')
 
     cy.get('#id_gender1').click()
@@ -48,15 +31,21 @@ Cypress.Commands.add('cadastroNovoUsuario', (email) => {
     cy.get('[data-qa=account-created]').should('be.visible').and('contain', 'Account Created!')
     cy.get('[data-qa=continue-button]').click()
 })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('cadastroUsuarioTelaLogin', (email) => {
+    cy.get('input[data-qa=signup-name]').type('John Doe')
+    cy.get('input[data-qa=signup-email]').type(email)
+    cy.get('button[data-qa=signup-button]').click()
+})
+
+Cypress.Commands.add('login', (email, senha) => {
+    cy.contains('h2', 'Login to your account').should('be.visible')
+    cy.get('input[data-qa=login-email]').type(email)
+    cy.get('input[data-qa=login-password]').type(senha)
+    cy.get('button[data-qa=login-button]').click()
+})
+
+Cypress.Commands.add('deletarConta', () => {
+    cy.get('[data-qa=account-deleted]').should('be.visible').and('contain', 'Account Deleted!')
+    cy.get('[data-qa=continue-button]').click()
+})
