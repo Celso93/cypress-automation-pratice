@@ -1,5 +1,5 @@
 import * as cadastro from '../module/cadastro/index.js'
-import { loginUsuario } from '../module/login/index.js'
+import * as login from '../module/login/index.js'
 
 describe('template spec', () => {
 
@@ -22,16 +22,16 @@ describe('template spec', () => {
   it('Login com email e senha corretos', () => {
     cadastro.cadastroNovoUsuario(emailAleatorio)
     cy.get("a[href='/logout']").should('be.visible').click()
-    loginUsuario(emailAleatorio, '123456')
-    cy.get('.navbar-nav').should('contain.text', 'Logged in as')
+    login.realizarLogin(emailAleatorio, '123456')
+    login.validarLoginComSucesso(emailAleatorio)
     cy.get('a[href="/delete_account"]').click()
     cy.deletarConta()
   })
 
   it('Login com email e senha incorretos', () => {
     cy.get('a[href="/login"]').click()
-    loginUsuario('email.invalido@example.com', 'senhaErrada123')
-    cy.contains('Your email or password is incorrect!').should('be.visible')
+    login.realizarLogin('email.invalido@example.com', 'senhaErrada123')
+    login.validarLoginComFalha('email.invalido@example.com', 'senhaErrada123')
   })
 
   it('Logout de usuário', () => {
