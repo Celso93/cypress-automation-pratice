@@ -1,4 +1,4 @@
-import { cadastroNovoUsuario, cadastroUsuarioTelaLogin } from '../module/cadastro/index.js'
+import * as cadastro from '../module/cadastro/index.js'
 import { loginUsuario } from '../module/login/index.js'
 
 describe('template spec', () => {
@@ -13,14 +13,14 @@ describe('template spec', () => {
 
 
   it('Cadastrar um novo usuário com sucesso', () => {
-    cadastroNovoUsuario(emailAleatorio)
+    cadastro.cadastroNovoUsuario(emailAleatorio)
     cy.get('.navbar-nav').should('contain.text', 'Logged in as John Doe')
     cy.get('a[href="/delete_account"]').click()
     cy.deletarConta()
   })
 
   it('Login com email e senha corretos', () => {
-    cadastroNovoUsuario(emailAleatorio)
+    cadastro.cadastroNovoUsuario(emailAleatorio)
     cy.get("a[href='/logout']").should('be.visible').click()
     loginUsuario(emailAleatorio, '123456')
     cy.get('.navbar-nav').should('contain.text', 'Logged in as')
@@ -35,15 +35,15 @@ describe('template spec', () => {
   })
 
   it('Logout de usuário', () => {
-    cadastroNovoUsuario(emailAleatorio)
+    cadastro.cadastroNovoUsuario(emailAleatorio)
     cy.get('a[href="/logout"]').click()
     cy.url().should('include', '/login')
   })
 
   it('Cadastro de usuário com email já existente', () => {
-    cadastroNovoUsuario(emailAleatorio)
+    cadastro.cadastroNovoUsuario(emailAleatorio)
     cy.get('a[href="/logout"]').click()
-    cadastroUsuarioTelaLogin(emailAleatorio)
+    cadastro.cadastroUsuarioTelaLogin(emailAleatorio)
     cy.contains('Email Address already exist!').should('be.visible')
   })
 })
