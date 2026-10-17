@@ -1,3 +1,8 @@
+/*
+Com XPath, os seletores ficaram mais longos e menos legíveis que em CSS, por causa da sintaxe com //, @, colchetes e aspas aninhadas (ex.: .navbar-nav virou //ul[contains(@class,'navbar-nav')]). 
+Na performance, a diferença foi pequena (1min18s com XPath contra 1min14s com CSS), então prefiro CSS com atributos data-qa, como recomenda a documentação do Cypress.
+*/
+
 describe('template spec', () => {
 
   let emailAleatorio;
