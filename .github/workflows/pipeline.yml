@@ -24,12 +24,12 @@ jobs:
       - name: Instalando dependências
         run: npm ci
 
-      - name: Executando os testes internos de API
+      - name: Executando os testes E2E
         run: npm run test:headless
 
-      # - name: Publicando o report dos testes internos
-      #   if: always()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: internal-report
-      #     path: reports/internal-report.html
+      - name: Publicando o report dos testes E2E
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report
+          path: cypress/reports/html
