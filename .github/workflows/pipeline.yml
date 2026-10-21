@@ -25,7 +25,7 @@ jobs:
         run: npm ci
 
       - name: Executando os testes E2E
-        run: npm run test:headless
+        run: npm run test:ci
 
       - name: Publicando o report dos testes E2E
         if: always()

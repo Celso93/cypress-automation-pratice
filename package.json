@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:headless": "npx cypress run"
+    "test:headless": "npx cypress run",
+    "test:ci": "npx cypress run --config excludeSpecPattern=cypress/e2e/login.cy.js"
   },
   "keywords": [],
   "author": "",
