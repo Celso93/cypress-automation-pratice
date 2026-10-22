@@ -2,7 +2,9 @@ const seletores = {
     formulario: 'form[action="/login"]',
     email: 'input[data-qa=login-email]',
     senha: 'input[data-qa=login-password]',
-    botao: 'button[data-qa=login-button]'
+    botao: 'button[data-qa=login-button]',
+    logout: 'a[href="/logout"]',
+    menu: '.navbar-nav'
 }
 
 function acessarTelaLogin() {
@@ -26,6 +28,10 @@ function realizarLoginComEnter(email, senha, campo = 'senha') {
     cy.get(seletores[campo]).type('{enter}')
 }
 
+function realizarLogout() {
+    cy.get(seletores.logout).click()
+}
+
 function validarCredenciaisEnviadas(email, senha) {
     cy.wait('@requisicaoLogin').its('request.body').then((corpo) => {
         const parametros = new URLSearchParams(corpo)
@@ -34,9 +40,13 @@ function validarCredenciaisEnviadas(email, senha) {
     })
 }
 
+function validarUsuarioLogado(nome = 'John Doe') {
+    cy.get(seletores.menu).should('contain.text', `Logged in as ${nome}`)
+}
+
 function validarLoginComSucesso(email, nome = 'John Doe') {
     validarCredenciaisEnviadas(email)
-    cy.get('.navbar-nav').should('contain.text', `Logged in as ${nome}`)
+    validarUsuarioLogado(nome)
 }
 
 function validarLoginComFalha(email, senha) {
@@ -62,6 +72,8 @@ export {
     acessarTelaLogin,
     realizarLogin,
     realizarLoginComEnter,
+    realizarLogout,
+    validarUsuarioLogado,
     validarLoginComSucesso,
     validarLoginComFalha,
     validarBloqueioDoNavegador

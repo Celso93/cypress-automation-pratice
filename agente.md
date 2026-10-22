@@ -116,6 +116,7 @@ Poucas funções, cada uma cobrindo uma ação ou um resultado de negócio. Sele
 - **Responsabilidade única:** cada função faz um único tipo de ação; formas diferentes de executar algo (ex.: enviar por clique vs. por Enter) viram funções separadas, não `if/else` por parâmetro. Trechos comuns vão para uma função interna não exportada.
 - **Comandos Cypress diretos:** as ações do Cypress (`cy.get(...).click()`, `.type(...)`) ficam escritas dentro do corpo da própria função; não usar objetos de callbacks/mapas de ações (ex.: `const envios = { botao: () => ... }`). O único objeto auxiliar aceito é o de `seletores`.
 - **Asserts centralizados:** validações ficam em funções `validar...` dentro do módulo, não espalhadas nas specs.
+- **Ordem no módulo:** objeto `seletores` → funções de ação (`acessar...`, `pesquisar...`, `realizar...`) → funções `validar...` no final do arquivo, sem intercalar ações e validações. O `export { ... }` segue a mesma ordem.
 - **Specs enxutas:** cada `it` combina chamadas de ação e de validação do módulo (ex.: `login.realizarLogin(...)` + `login.validarLoginComFalha(...)`), sem `cy.get`/`should` soltos para o fluxo testado.
 - **Sem comentários no código:** não adicionar comentários em specs, módulos ou commands; nomes de funções, parâmetros e títulos de `it` devem bastar. Explicações (ex.: valores aceitos de um parâmetro) ficam neste `agente.md`. Os comentários do template padrão do Cypress (`support/e2e.js`, `cypress.config.js`) podem permanecer.
 - **Idioma:** nomes de funções, comandos e títulos de `it` em português.

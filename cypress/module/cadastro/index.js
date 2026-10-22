@@ -38,7 +38,13 @@ function cadastroNovoUsuario(email) {
     cy.get('[data-qa=continue-button]').click()
 }
 
-export { 
+function excluirConta() {
+    cy.get('a[href="/delete_account"]').click()
+    cy.deletarConta()
+}
+
+export {
     cadastroNovoUsuario,
-    cadastroUsuarioTelaLogin
+    cadastroUsuarioTelaLogin,
+    excluirConta
 }
