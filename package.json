@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test:headless": "npx cypress run",
-    "test:ci": "npx cypress run --config excludeSpecPattern=cypress/e2e/login.cy.js",
-    "test:exercicio-final": "npx cypress run --env grepTags=@exercicio-final,grepFilterSpecs=true"
+    "test:exercicio-final": "npx cypress run --spec \"cypress/e2e/exercicio-final/**/*.cy.js\"",
+    "test:exercicio-final:tag": "npx cypress run --env grepTags=@exercicio-final,grepOmitFiltered=true",
+    "test:ci": "npm run test:exercicio-final"
   },
   "keywords": [],
   "author": "",

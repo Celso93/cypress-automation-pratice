@@ -44,6 +44,11 @@ function validarUsuarioLogado(nome = 'John Doe') {
     cy.get(seletores.menu).should('contain.text', `Logged in as ${nome}`)
 }
 
+function validarLogoutRealizado() {
+    cy.url().should('include', '/login')
+    cy.get(seletores.logout).should('not.exist')
+}
+
 function validarLoginComSucesso(email, nome = 'John Doe') {
     validarCredenciaisEnviadas(email)
     validarUsuarioLogado(nome)
@@ -74,6 +79,7 @@ export {
     realizarLoginComEnter,
     realizarLogout,
     validarUsuarioLogado,
+    validarLogoutRealizado,
     validarLoginComSucesso,
     validarLoginComFalha,
     validarBloqueioDoNavegador

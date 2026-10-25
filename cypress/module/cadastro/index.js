@@ -43,8 +43,14 @@ function excluirConta() {
     cy.deletarConta()
 }
 
+function validarEmailJaCadastrado() {
+    cy.url().should('include', '/signup')
+    cy.contains('p', 'Email Address already exist!').should('be.visible')
+}
+
 export {
     cadastroNovoUsuario,
     cadastroUsuarioTelaLogin,
-    excluirConta
+    excluirConta,
+    validarEmailJaCadastrado
 }

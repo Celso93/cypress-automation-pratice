@@ -5,6 +5,15 @@ const baseUrl = process.env.BASE_URL?.trim() || 'https://www.automationexercise.
 
 module.exports = defineConfig({
   watchForFileChanges: false,
+  blockHosts: [
+    '*googlesyndication.com',
+    '*doubleclick.net',
+    '*googleadservices.com',
+    '*google-analytics.com',
+    '*googletagmanager.com',
+    '*adtrafficquality.google',
+    '*fundingchoicesmessages.google.com',
+  ],
   retries: {
     openMode: 0,
     runMode: 3,

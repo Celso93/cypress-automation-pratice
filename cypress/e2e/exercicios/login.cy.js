@@ -1,5 +1,5 @@
-import * as cadastro from '../module/cadastro/index.js'
-import * as login from '../module/login/index.js'
+import * as cadastro from '../../module/cadastro/index.js'
+import * as login from '../../module/login/index.js'
 
 const senhaCorreta = '123456'
 
