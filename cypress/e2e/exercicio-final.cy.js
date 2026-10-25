@@ -7,7 +7,7 @@ import * as checkout from '../module/checkout/index.js'
 
 const senhaCorreta = '123456'
 
-describe('Exercício de Automação - Cenários 8,9,10,15 e 16', () => {
+describe('Exercício de Automação - Cenários 8,9,10,15 e 16', { tags: '@exercicio-final' }, () => {
 
   let emailAleatorio;
 

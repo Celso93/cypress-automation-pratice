@@ -1,7 +1,7 @@
 import * as cadastro from '../module/cadastro/index.js'
 import * as login from '../module/login/index.js'
 
-describe('Exercício de Automação - Cenários 1 a 5', () => {
+describe('Exercício de Automação - Cenários 1 a 5', { tags: '@exercicio-final' }, () => {
 
   let emailAleatorio;
 

@@ -1,7 +1,14 @@
+require('dotenv').config();
 const { defineConfig } = require("cypress");
+
+const baseUrl = process.env.BASE_URL?.trim() || 'https://www.automationexercise.com';
 
 module.exports = defineConfig({
   watchForFileChanges: false,
+  retries: {
+    openMode: 0,
+    runMode: 3,
+  },
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
     reportDir: 'cypress/reports/html',
@@ -10,9 +17,12 @@ module.exports = defineConfig({
     inlineAssets: true,
   },
   e2e: {
-    baseUrl: 'https://www.automationexercise.com',
+    baseUrl,
+    testIsolation: true,
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
+      require('@cypress/grep/src/plugin')(config);
+      return config;
     },
   },
 });

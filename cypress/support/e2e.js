@@ -17,6 +17,9 @@
 import './commands'
 import 'cypress-xpath'
 import 'cypress-mochawesome-reporter/register'
+import registerCypressGrep from '@cypress/grep'
+
+registerCypressGrep()
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
